@@ -92,16 +92,3 @@ class JsonParser:
         output_str = "".join(output_list)  # transform list of comments to string
 
         return output_str
-
-
-inFile = r"F:\UNI\Master WiInfo\Seminararbeit UM\instagram\lime\lime.json"
-
-outFile = r"F:\UNI\Master WiInfo\Seminararbeit UM\instagram\lime\comments.txt"
-
-jParser = JsonParser(inFile, outFile)
-
-
-jParser.switch_output()
-jParser.switch_output()
-jParser.switch_output()
-# print(jParser.parse(split=False))
