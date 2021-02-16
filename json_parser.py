@@ -4,7 +4,7 @@ import json
 import re
 
 
-class JsonParser:
+class IGJsonParser:
     """
     Parses through json file, that is generated with instagram-scraping package.
     Removes Emojis, as well as @'s and extracts comments.
@@ -27,7 +27,7 @@ class JsonParser:
 
     def parse(self, split=True):
         """
-        If JsonParser parameter 'output' is true
+        If IGJsonParser parameter 'output' is true
         this class gives out a .txt file at the output location.
 
         :param split: prints delimiter, post shortcode and post number if True
@@ -47,6 +47,7 @@ class JsonParser:
                                    u"\U0001F680-\U0001F6FF"  # transport & map symbols
                                    u"\U0001F900-\U0001F9FF"  # supplemental symbols & pictographs
                                    u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                                   u"\U0001F100-\U0002FA1F"  # other symbols
                                    "]+", flags=re.UNICODE)
         at_pattern = re.compile(r"@\S*")  # @s pattern
         line_pattern = re.compile(r"\n")  # remove \n in comments
