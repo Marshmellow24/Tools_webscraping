@@ -4,9 +4,9 @@ from textblob import TextBlob as TextBlobEN
 import re
 from langdetect import detect
 
-with open(r"C:\Texte\UNI\Master WiInfo\Seminararbeit UM\youtube\comments"
-          r"\e_scooter_zum_ausleihen_das_bieten_tier_circ_und_voi.txt", encoding="utf-8") as f:
-    raw = f.readlines()
+# with open(r"C:\Texte\UNI\Master WiInfo\Seminararbeit UM\youtube\comments"
+#           r"\e_scooter_zum_ausleihen_das_bieten_tier_circ_und_voi.txt", encoding="utf-8") as f:
+#     raw = f.readlines()
 
 
 REMOVE_LINESEP = re.compile(r"\n", re.IGNORECASE)
@@ -19,12 +19,15 @@ SLIM_SENTIMENT = re.compile(r"Sentiment\(polarity=|, subjectivity=\d.\d*\)")
 # regex patterns for data cleaning of json parsed files
 
 
-def clean_json(data):
+def clean_file(file):
+    with open(file, encoding="utf-8") as f:
+        data = f.readlines()
+
     output = []
     for sentence in data:
-        lineSep_removed = re.sub(REMOVE_LINESEP, "", sentence)
+        linesep_removed = re.sub(REMOVE_LINESEP, "", sentence)
         # id_removed = re.sub(REMOVE_ID, "", lineSep_removed)
-        ast_removed = re.sub(REMOVE_ASTERISKS, "", lineSep_removed)
+        ast_removed = re.sub(REMOVE_ASTERISKS, "", linesep_removed)
         index_removed = re.sub(REMOVE_INDEX, "", ast_removed)
 
         if index_removed:  # only add non-empty strings to list
