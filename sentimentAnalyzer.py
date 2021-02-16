@@ -84,17 +84,14 @@ def compute_sentiments(data):
     :param data: list of tokens
     :return: list of tuples containing tokens with sentiment probabilities
     """
-    slim_sentiment = re.compile(r"Sentiment\(polarity=|, subjectivity=\d.\d*\)")  # leaves out only value of sentiment
 
     sentiments = []
     for token in data:
         blob = TextBlob(token)
-        sentiment_value = re.sub(slim_sentiment, "", str(blob.sentiment))
-        sentiments.append((token, float(sentiment_value)))
+        sentiments.append((token, blob.sentiment.subjectivity))
     for token in data:
         blob = TextBlobEN(token)
-        sentiment_value = re.sub(slim_sentiment, "", str(blob.sentiment))
-        sentiments.append((token, float(sentiment_value)))
+        sentiments.append((token, blob.sentiment.subjectivity))
     return sentiments
 
 
@@ -107,5 +104,6 @@ def sentiments_token_combo(filepath, lang="de"):
 
 input_file = r"\directory\subdirectory\file.txt"  # example, insert file path here
 
-print(sentiments_token_combo(input_file, "en"))  # example, here: compute sentiments for english tokens for file above
+# example, here: compute sentiments for english tokens for file above and print them in one column
+print(*sentiments_token_combo(input_file, "en"), sep='\n')
 
